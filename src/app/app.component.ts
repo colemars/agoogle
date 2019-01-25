@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import * as Matter from 'matter-js'
 
 @Component({
   selector: 'app-root',
