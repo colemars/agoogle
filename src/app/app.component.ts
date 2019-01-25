@@ -18,13 +18,14 @@ export class AppComponent implements OnInit {
     let properties = [];
 
     elements = document.getElementsByClassName("physics-element");
-    
+
 
     for ( var i = 0; i < elements.length; i ++ ) {
 
-      properties[i] = this.getElementProperties( elements[i]);
+      properties[i] = this.getElementProperties( elements[i] );
 
     }
+    console.log(properties)
   }
 
   getElementProperties( element ) {
