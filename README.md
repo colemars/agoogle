@@ -8,6 +8,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 **Implemented Gravity via Matter**
 **Will link to clone of Google Store**
 **Will Display Gravity functionality**
+**Will Deploy on Firebase**
 
 
 ## Development server
