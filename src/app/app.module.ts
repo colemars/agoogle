@@ -8,6 +8,7 @@ import { HeaderComponent } from './header/header.component';
 import { SearchComponent } from './search/search.component';
 import { FooterComponent } from './footer/footer.component';
 import { GetElementsComponent } from './get-elements/get-elements.component';
+import { SketchComponent } from './sketch/sketch.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { GetElementsComponent } from './get-elements/get-elements.component';
     HeaderComponent,
     SearchComponent,
     FooterComponent,
-    GetElementsComponent
+    GetElementsComponent,
+    SketchComponent
   ],
   imports: [
     BrowserModule

@@ -26,7 +26,8 @@ export class GetElementsComponent implements OnInit {
       properties[i] = GetElementsComponent.properties( elements[i] );
 
     }
-    console.log(properties)
+    console.log(properties, elements)
+    return [properties, elements]
   }
 
   static properties( element ) {

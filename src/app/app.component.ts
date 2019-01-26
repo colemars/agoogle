@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as Matter from 'matter-js'
+import { GetElementsComponent } from './get-elements/get-elements.component.js'
+import { SketchComponent } from './sketch/sketch.component.js'
 // import { Two } from 'two.js'
 
 @Component({
@@ -14,36 +16,11 @@ export class AppComponent implements OnInit {
   constructor() {}
 
   ngOnInit(){
-    let elements;
-    let properties = [];
-
-    elements = document.getElementsByClassName("physics-element");
-
-
-    for ( var i = 0; i < elements.length; i ++ ) {
-
-      properties[i] = this.getElementProperties( elements[i] );
-
-    }
-    console.log(properties)
+    GetElementsComponent.get()
+    // console.log(document.body.innerHTML)
+    // document.body.innerHTML = ""
+    SketchComponent.drawTest();
   }
-
-  getElementProperties( element ) {
-
-  var x = 0;
-  var y = 0;
-  var width = element.offsetWidth;
-  var height = element.offsetHeight;
-
-  do {
-
-    x += element.offsetLeft;
-    y += element.offsetTop;
-
-  } while ( element = element.offsetParent );
-
-  return [ x, y, width, height ];
-}
 
 
 }
