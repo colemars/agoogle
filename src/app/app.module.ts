@@ -10,6 +10,7 @@ import { FooterComponent } from './footer/footer.component';
 import { GetElementsComponent } from './get-elements/get-elements.component';
 import { SketchComponent } from './sketch/sketch.component';
 import { CanvasComponent } from './canvas/canvas.component';
+import { EngineComponent } from './engine/engine.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { CanvasComponent } from './canvas/canvas.component';
     FooterComponent,
     GetElementsComponent,
     SketchComponent,
-    CanvasComponent
+    CanvasComponent,
+    EngineComponent
   ],
   imports: [
     BrowserModule
