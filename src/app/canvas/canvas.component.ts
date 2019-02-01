@@ -8,7 +8,7 @@ import * as p5 from 'p5';
   styleUrls: ['./canvas.component.css']
 })
 export class CanvasComponent implements OnInit {
-
+  p5 : any;
   constructor() {
 
   }
@@ -21,13 +21,13 @@ export class CanvasComponent implements OnInit {
       }
 
       s.setup = () => {
-        s.createCanvas(400, 400);
+        s.createCanvas(window.innerWidth, window.innerHeight);
       };
 
       s.draw = () => {
-        s.background(255);
-        s.rect(100, 100, 100, 100);
+        s.background(51);
       };
     }
+    this.p5 = new p5(sketch);
   }
 }
