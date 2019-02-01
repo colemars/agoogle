@@ -27,10 +27,11 @@ export class CanvasComponent implements OnInit {
 
     let ground;
 
+    let img;
+
     const sketch = (s) => {
 
       s.preload = () => {
-        // preload code
       }
 
       s.setup = () => {
@@ -41,6 +42,9 @@ export class CanvasComponent implements OnInit {
         var options = {
         isStatic: true
         }
+
+        img = s.loadImage('./assets/images/logo.png');
+
         ground = Bodies.rectangle(200, s.height, s.width, 100, options);
 
         World.add(world, ground);
@@ -59,6 +63,7 @@ export class CanvasComponent implements OnInit {
         s.noStroke(255);
         s.fill(170);
         // s.rectMode(CENTER);
+        s.image(img, 0, s.height / 2, img.width / 2, img.height / 2);
         s.rect(ground.position.x, ground.position.y, s.width, 100);
         };
       }
