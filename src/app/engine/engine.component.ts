@@ -45,10 +45,24 @@ export class EngineComponent implements OnInit {
 
     const offset = 10,
         options = {
-            isStatic: true
+            isStatic: true,
+            render: {
+                 fillStyle: 'red',
+                 strokeStyle: 'red',
+                 lineWidth: 3
+            }
+
     };
 
     world.bodies = [];
+
+    console.log(options);
+    World.add(world, [
+       Bodies.rectangle(window.innerWidth/2, -offset, window.innerWidth, 50.5, options),
+       Bodies.rectangle(window.innerWidth/2, window.innerHeight-30, window.innerWidth, 50.5, options),
+       Bodies.rectangle(window.innerWidth + offset, window.innerHeight/2, 50.5, window.innerHeight + 2 * offset, options),
+       Bodies.rectangle(-offset, window.innerHeight/2, 50.5, window.innerHeight, options)
+   ]);
 
 
   }
