@@ -16,10 +16,10 @@ export class AppComponent implements OnInit {
   constructor() {}
 
   ngOnInit(){
-    GetElementsComponent.get()
+    // GetElementsComponent.get()
     // console.log(document.body.innerHTML)
     // document.body.innerHTML = ""
-    SketchComponent.drawTest();
+    // SketchComponent.drawTest();
   }
 
 
