@@ -1,8 +1,10 @@
 #content {
-
-  width: 100%;
-  text-align: center;
-  margin-top: 192px;
+  position: absolute;
+  left: 50vw;
+  top: 30vh;
+  /* width: 100%; */
+  /* text-align: center; */
+  /* margin-top: 192px; */
   white-space: nowrap;
 
 }
