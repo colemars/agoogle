@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import * as Matter from 'matter-js';
 import { GetElementsComponent } from '../get-elements/get-elements.component';
 //fix for not finding poly-decomp error
-const globalAny:any = global;
-globalAny.decomp = require('poly-decomp');
+declare var global: any
+declare var require: any;
+global.decomp = require('poly-decomp');
 
 
 @Component({
