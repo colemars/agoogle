@@ -65,8 +65,8 @@ export class EngineComponent implements OnInit {
       Bodies.rectangle(-offset, window.innerHeight/2, 50.5, window.innerHeight, options)
     ]);
 
-    let logo = Bodies.rectangle(window.innerWidth/2, window.innerHeight/2, window.innerWidth, 50.5, {
-      isStatic: 'true',
+    let logo = Bodies.rectangle(window.innerWidth/2, window.innerHeight/4, window.innerWidth, 50.5, {
+      isStatic: true,
       render: {
         sprite: {
           texture: './assets/images/logo.png'
