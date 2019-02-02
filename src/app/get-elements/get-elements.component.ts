@@ -14,20 +14,22 @@ export class GetElementsComponent implements OnInit {
   }
 
   static get() {
+    let objects = [];
     let elements;
     let properties = [];
 
 
     elements = document.getElementsByClassName("physics-element");
+    console.log(elements.length)
 
-
-    for ( let i = 0; i < elements.length; i ++ ) {
-
+    let length = elements.length;
+    let i;
+    for ( i = 0; i < length; i++ ) {
       properties[i] = GetElementsComponent.properties( elements[i] );
-
+      objects[i] = [elements[i], properties[i]]
+      console.log(i)
     }
-    console.log(properties, elements)
-    return [properties, elements]
+    return objects;
   }
 
   static properties( element ) {
