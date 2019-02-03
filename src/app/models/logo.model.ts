@@ -5,12 +5,13 @@ import * as p5 from 'p5';
 
 export class Logo {
   [x: string]: any;
-  constructor(x, y, w, h, img, world) {
+  constructor(x, y, w, h, options, img, world) {
     this.w = w;
     this.h = h;
     this.img = img;
-    this.body = Matter.Bodies.rectangle(x,y,w,h)
-    Matter.World.add(world, this.body);
+    this.world = world;
+    this.body = Matter.Bodies.rectangle(x,y,w,h,options)
+    Matter.World.add(this.world, this.body);
 
   }
 
@@ -30,6 +31,10 @@ export class Logo {
        p5.pop();
 
 
+  }
+
+  delete() {
+    Matter.World.remove(this.world,this.body)
   }
 
 }
