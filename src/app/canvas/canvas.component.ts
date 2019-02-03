@@ -28,6 +28,7 @@ export class CanvasComponent implements OnInit {
     let engine;
     let world;
     let search;
+    let searchBody;
     let boxes = [];
     let bodies = [];
     let logo;
@@ -60,16 +61,20 @@ export class CanvasComponent implements OnInit {
         isStatic: true
         }
 
-        // input = new Search(s.width/2-250, s.height/3, 500, 40, world)
+        search = new Search(s.width/2, s.height/3, 500, 40, world, s);
+        search.show(s)
+        let test2 = document.getElementById('search');
+        // debugger;
 
-        search = Bodies.rectangle(s.width/2, s.height/3, 500, 1, options)
 
-        World.add(world, search)
-
-        search = s.createInput().addClass('search');
-        search.position(s.width/2-250, s.height/3);
-        search.style('width', '500px');
-        search.style('height', '40px');
+        // searchBody = Bodies.rectangle(s.width/2, s.height/3, 500, 1, options)
+        //
+        // World.add(world, searchBody)
+        //
+        // search = s.createInput().addClass('search');
+        // search.position(s.width/2-250, s.height/3);
+        // search.style('width', '500px');
+        // search.style('height', '40px');
 
         logo = new Logo(s.width/2, s.height/4, img.width/2, img.height/2, options, img, world);
 
@@ -135,7 +140,7 @@ export class CanvasComponent implements OnInit {
         // }
         logo.show(s)
         ground.show(s)
-        // input.show(s)
+
 
         // var val = slider.value();
         // s.background(val);
