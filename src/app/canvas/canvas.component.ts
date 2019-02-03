@@ -5,6 +5,7 @@ import "p5/lib/addons/p5.dom";
 import { Box } from '../models/box.model'
 import { Logo } from '../models/logo.model'
 import { Boundary } from '../models/boundary.model'
+import { Search } from '../models/search.model'
 
 @Component({
   selector: 'app-canvas',
@@ -26,7 +27,7 @@ export class CanvasComponent implements OnInit {
 
     let engine;
     let world;
-    let box5;
+    let search;
     let boxes = [];
     let bodies = [];
     let logo;
@@ -59,8 +60,16 @@ export class CanvasComponent implements OnInit {
         isStatic: true
         }
 
-        s.createP('hello').addClass('test');
-        const test = s.selectAll('.test');
+        // input = new Search(s.width/2-250, s.height/3, 500, 40, world)
+
+        search = Bodies.rectangle(s.width/2, s.height/3, 500, 1, options)
+
+        World.add(world, search)
+
+        search = s.createInput().addClass('search');
+        search.position(s.width/2-250, s.height/3);
+        search.style('width', '500px');
+        search.style('height', '40px');
 
         logo = new Logo(s.width/2, s.height/4, img.width/2, img.height/2, options, img, world);
 
@@ -80,11 +89,14 @@ export class CanvasComponent implements OnInit {
         isStatic: false
         }
 
-        mousePressed = true;
 
+
+        if (!(mousePressed)) {
         logo.delete();
+        logo = new Logo(s.width/2, s.height/4, img.width/2, img.height/2, testOptions, img, world);
+        }
 
-        // logo = new Logo(s.width/2, s.height/4, img.width/2, img.height/2, testOptions, img, world);
+        mousePressed = true;
 
 
 
@@ -123,6 +135,10 @@ export class CanvasComponent implements OnInit {
         // }
         logo.show(s)
         ground.show(s)
+        // input.show(s)
+
+        // var val = slider.value();
+        // s.background(val);
 
         for (var i = 0; i < boxes.length; i++) {
         boxes[i].show(s);
@@ -130,10 +146,10 @@ export class CanvasComponent implements OnInit {
         // logo.show(s);
         // console.log(logo)
         }
-        // s.rectMode(s.CENTER);
+        s.rectMode(s.CENTER);
         // s.image(img, 0, s.height / 2, img.width / 2, img.height / 2);
         // console.log(s.height)
-        // s.rect(0, s.height, s.width, 1);
+        s.rect(s.width/2, s.height/3, 500, 1);
         };
       }
     this.p5 = new p5(sketch);
