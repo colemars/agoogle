@@ -24,9 +24,12 @@ export class CanvasComponent implements OnInit {
 
     let engine;
     let world;
+    let box5;
     let boxes = [];
     let bodies = [];
     let logo;
+    let mousePressed = false;
+
 
     let ground;
 
@@ -35,10 +38,13 @@ export class CanvasComponent implements OnInit {
     const sketch = (s) => {
 
       s.preload = () => {
+
+        img = s.loadImage('./assets/images/logo.png');
+
       }
 
       s.setup = () => {
-        s.createCanvas(400, 400);
+        s.createCanvas(300,300);
         engine = Engine.create();
         world = engine.world;
         //Engine.run(engine);
@@ -46,17 +52,51 @@ export class CanvasComponent implements OnInit {
         isStatic: true
         }
 
-        img = s.loadImage('./assets/images/logo.png');
+        var options = {
+        isStatic: true
+        }
 
-        ground = Bodies.rectangle(s.width/2, s.height/2, s.width, 10, options);
+        logo = new Logo(s.width/2, s.height/2, img.width/5, img.height/5, options, img, world);
+
+
+        ground = Bodies.rectangle(s.width/2, s.height+3, s.width, 1, options);
 
         World.add(world, ground);
+
+        // logo[0] = new Logo(s.width/2, s.height/3, img.width/2, img.height/2, options, img, world);
+
+
       };
 
       s.mouseClicked = () => {
+        var options = {
+        isStatic: true
+        }
+        var testOptions = {
+        isStatic: false
+        }
+
+        mousePressed = true;
+
+        logo.delete();
+
+        logo = new Logo(s.width/2, s.height/2, img.width/5, img.height/5, testOptions, img, world);
+
+
+
+        // logo.body.isStatic = false;
+
+        // if (!(logo === null)) {
+        //   console.log(logo)
+        //   logo.body.isStatic = false;
+        // }
+
+        // boxes.push(new Logo(s.mouseX, s.mouseY, img.width/10, img.height/10, testOptions, img, world));
+
+        // console.log(img)
           // logo = new Box(0, s.height / 2, img.width / 2, img.height / 2, world)
-        boxes.push(new Logo(s.mouseX, s.mouseY, img.width/10, img.height/10, img, world));
-        console.log(img)
+        // boxes.push(new Logo(s.mouseX, s.mouseY, img.width/10, img.height/10, img, world));
+        // console.log(img)
         // boxes.push(new Box(s.mouseX, s.mouseY, s.random(10, 40), s.random(10, 40), world));
       }
 
@@ -65,15 +105,30 @@ export class CanvasComponent implements OnInit {
         s.noStroke(255);
         s.fill(170);
         Engine.update(engine);
+        var options = {
+        isStatic: false
+        }
+        // debugger;
+
+        // if (mousePressed === false) {
+          // console.log(logo)
+
+        // }
+        // for (var i = 0; i < logo.length; i++) {
+        // logo[i].show(s);
+        // }
+        logo.show(s)
+
         for (var i = 0; i < boxes.length; i++) {
         boxes[i].show(s);
+        // logo[i].show(s);
         // logo.show(s);
         // console.log(logo)
         }
-        // s.rectMode(CENTER);
+        // s.rectMode(s.CENTER);
         // s.image(img, 0, s.height / 2, img.width / 2, img.height / 2);
-
-        // s.rect(ground.position.x, ground.position.y, s.width, 100);
+        // console.log(s.height)
+        // s.rect(0, s.height, s.width, 1);
         };
       }
     this.p5 = new p5(sketch);
