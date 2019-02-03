@@ -3,7 +3,7 @@ import * as p5 from 'p5';
 
 export class Search {
   [x: string]: any;
-  constructor(x, y, w, h, world) {
+  constructor(x, y, w, h, world, p5) {
     this.w = w;
     this.h = h;
     this.world = world;
@@ -13,7 +13,7 @@ export class Search {
       isStatic: true,
     }
 
-    this.body = Matter.Bodies.rectangle(x,y,w,h,this.options)
+    this.body = Matter.Bodies.rectangle(x,y,w,1,this.options)
     Matter.World.add(this.world, this.body);
 
   }
@@ -23,27 +23,20 @@ export class Search {
 
        let pos = this.body.position;
        let angle = this.body.angle;
+
        let input;
 
-       // input = p5.createInput().addClass('search');
-       // // s.rectMode(s.CENTER);
-       // input.position(p5.width/2-this.width/2, p5.height/3);
-       // input.style('width', this.width + 'px');
-       // input.style('height', this.height + 'px');
 
 
-       p5.push();
-       // p5.translate(pos.x, pos.y);
-       // p5.rotate(angle);
-       // p5.rectMode(p5.CENTER);
-       // p5.fill(0);
-       // p5.rect(0,0, this.w, this.h);
-       input = p5.createInput().addClass('search');
-       // s.rectMode(s.CENTER);
-       input.position(pos.x, pos.y);
-       input.style('width', this.width + 'px');
-       input.style('height', this.height + 'px');
-       p5.pop();
+           p5.push();
+           input = p5.createInput().id('search');
+           // s.rectMode(s.CENTER);
+           // p5.translate(pos.x, pos.y);
+           input.position(pos.x-this.w/2, pos.y);
+           document.getElementById('search').style.width = this.w + 'px';
+           document.getElementById('search').style.height = this.h + 'px';
+           // p5.rect(pos.x, pos.y, this.w, this.h);
+           p5.pop();
 
 
   }
