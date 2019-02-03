@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as Matter from 'matter-js';
 import * as p5 from 'p5';
 import { Box } from '../models/box.model'
+import { Logo } from '../models/logo.model'
 
 @Component({
   selector: 'app-canvas',
@@ -47,16 +48,16 @@ export class CanvasComponent implements OnInit {
 
         img = s.loadImage('./assets/images/logo.png');
 
-        ground = Bodies.rectangle(200, s.height, s.width, 100, options);
+        ground = Bodies.rectangle(s.width/2, s.height/2, s.width, 10, options);
 
         World.add(world, ground);
       };
 
       s.mouseClicked = () => {
           // logo = new Box(0, s.height / 2, img.width / 2, img.height / 2, world)
-        boxes.push(new Box(s.mouseX, s.mouseY, img.width/2, img.height/2, img, world));
+        boxes.push(new Logo(s.mouseX, s.mouseY, img.width/10, img.height/10, img, world));
         console.log(img)
-        // boxes.push(new Box(10, s.height / 2, img.width / 2, img.height / 2, world));
+        // boxes.push(new Box(s.mouseX, s.mouseY, s.random(10, 40), s.random(10, 40), world));
       }
 
       s.draw = () => {
@@ -67,12 +68,12 @@ export class CanvasComponent implements OnInit {
         for (var i = 0; i < boxes.length; i++) {
         boxes[i].show(s);
         // logo.show(s);
-        console.log(logo)
+        // console.log(logo)
         }
         // s.rectMode(CENTER);
         // s.image(img, 0, s.height / 2, img.width / 2, img.height / 2);
 
-        s.rect(ground.position.x, ground.position.y, s.width, 100);
+        // s.rect(ground.position.x, ground.position.y, s.width, 100);
         };
       }
     this.p5 = new p5(sketch);
