@@ -3,6 +3,7 @@ import * as Matter from 'matter-js';
 import * as p5 from 'p5';
 import { Box } from '../models/box.model'
 import { Logo } from '../models/logo.model'
+import { Boundary } from '../models/boundary.model'
 
 @Component({
   selector: 'app-canvas',
@@ -40,11 +41,12 @@ export class CanvasComponent implements OnInit {
       s.preload = () => {
 
         img = s.loadImage('./assets/images/logo.png');
+        s.disableFriendlyErrors = true
 
       }
 
       s.setup = () => {
-        s.createCanvas(300,300);
+        s.createCanvas(window.innerWidth,window.innerHeight);
         engine = Engine.create();
         world = engine.world;
         //Engine.run(engine);
@@ -59,9 +61,7 @@ export class CanvasComponent implements OnInit {
         logo = new Logo(s.width/2, s.height/2, img.width/5, img.height/5, options, img, world);
 
 
-        ground = Bodies.rectangle(s.width/2, s.height+3, s.width, 1, options);
-
-        World.add(world, ground);
+        ground = new Boundary(s.width/2, s.height+3, s.width, 100, options, world);
 
         // logo[0] = new Logo(s.width/2, s.height/3, img.width/2, img.height/2, options, img, world);
 
@@ -91,7 +91,7 @@ export class CanvasComponent implements OnInit {
         //   logo.body.isStatic = false;
         // }
 
-        // boxes.push(new Logo(s.mouseX, s.mouseY, img.width/10, img.height/10, testOptions, img, world));
+        boxes.push(new Logo(s.mouseX+10, s.mouseY, img.width/10, img.height/10, testOptions, img, world));
 
         // console.log(img)
           // logo = new Box(0, s.height / 2, img.width / 2, img.height / 2, world)
@@ -118,6 +118,7 @@ export class CanvasComponent implements OnInit {
         // logo[i].show(s);
         // }
         logo.show(s)
+        ground.show(s)
 
         for (var i = 0; i < boxes.length; i++) {
         boxes[i].show(s);
