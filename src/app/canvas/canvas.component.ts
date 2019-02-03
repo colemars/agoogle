@@ -24,6 +24,8 @@ export class CanvasComponent implements OnInit {
     let engine;
     let world;
     let boxes = [];
+    let bodies = [];
+    let logo;
 
     let ground;
 
@@ -50,20 +52,26 @@ export class CanvasComponent implements OnInit {
         World.add(world, ground);
       };
 
-      s.mouseDragged = () => {
-        boxes.push(new Box(s.mouseX, s.mouseY, s.random(10, 40), s.random(10, 40), world));
+      s.mouseClicked = () => {
+          // logo = new Box(0, s.height / 2, img.width / 2, img.height / 2, world)
+        boxes.push(new Box(s.mouseX, s.mouseY, img.width/2, img.height/2, img, world));
+        console.log(img)
+        // boxes.push(new Box(10, s.height / 2, img.width / 2, img.height / 2, world));
       }
 
       s.draw = () => {
         s.background(51);
+        s.noStroke(255);
+        s.fill(170);
         Engine.update(engine);
         for (var i = 0; i < boxes.length; i++) {
         boxes[i].show(s);
+        // logo.show(s);
+        console.log(logo)
         }
-        s.noStroke(255);
-        s.fill(170);
         // s.rectMode(CENTER);
-        s.image(img, 0, s.height / 2, img.width / 2, img.height / 2);
+        // s.image(img, 0, s.height / 2, img.width / 2, img.height / 2);
+
         s.rect(ground.position.x, ground.position.y, s.width, 100);
         };
       }
