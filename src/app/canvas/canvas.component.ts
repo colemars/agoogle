@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as Matter from 'matter-js';
 import * as p5 from 'p5';
+import "p5/lib/addons/p5.dom";
 import { Box } from '../models/box.model'
 import { Logo } from '../models/logo.model'
 import { Boundary } from '../models/boundary.model'
@@ -58,7 +59,10 @@ export class CanvasComponent implements OnInit {
         isStatic: true
         }
 
-        logo = new Logo(s.width/2, s.height/2, img.width/5, img.height/5, options, img, world);
+        s.createP('hello').addClass('test');
+        const test = s.selectAll('.test');
+
+        logo = new Logo(s.width/2, s.height/4, img.width/2, img.height/2, options, img, world);
 
 
         ground = new Boundary(s.width/2, s.height+3, s.width, 100, options, world);
@@ -80,7 +84,7 @@ export class CanvasComponent implements OnInit {
 
         logo.delete();
 
-        logo = new Logo(s.width/2, s.height/2, img.width/5, img.height/5, testOptions, img, world);
+        // logo = new Logo(s.width/2, s.height/4, img.width/2, img.height/2, testOptions, img, world);
 
 
 
