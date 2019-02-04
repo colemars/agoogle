@@ -47,10 +47,10 @@ export class EngineComponent implements OnInit {
       }
     });
 
-    Render.run(render);
+    // Render.run(render);
 
     const runner = Runner.create();
-    Runner.run(runner, engine);
+    Runner.run(engine);
 
     const offset = 10,
     options = {
@@ -72,7 +72,7 @@ export class EngineComponent implements OnInit {
 
 
 
-    let length = elements.length;
+    const length = elements.length;
     let i;
     for ( i = 0; i < length; i++ ) {
 
@@ -85,7 +85,7 @@ export class EngineComponent implements OnInit {
       // debugger;
 
       element.style.position = 'absolute';
-      element.style.left = ( - properties[2]/2) + 'px'; // will be set by renderer
+      element.style.left = (350) + 'px'; // will be set by renderer
       element.style.top = ( - properties[3]/2) + 'px';
       element.style.width = properties[2] + 'px';
 
@@ -106,23 +106,28 @@ export class EngineComponent implements OnInit {
    // });
 
    // console.log(stack)
-   //
+
    // World.add(world, stack);
 
-      let test = Bodies.fromVertices(488,227, [
+      let test = Bodies.fromVertices(properties[0],properties[1], [
           { x: 0, y: 0 },
           { x: properties[2], y: 0 },
           { x: properties[2], y: properties[3] },
           { x: 0, y: properties[3] },
-        ], {isStatic: true});
+        ], {isStatic: false});
+
+      // debugger;
+
+      world.bodies.push(test);
+
+      console.log("test ", world.bodies);
 
 
       World.add(world, test);
 
+    };
 
-
-
-    }
+      // console.log(test.position.x)
 
 
 
@@ -134,36 +139,93 @@ export class EngineComponent implements OnInit {
     ]);
 
 
+    // add mouse control
+    var mouse = Mouse.create(render.canvas),
+        mouseConstraint = MouseConstraint.create(engine, {
+            mouse: mouse,
+            constraint: {
+                stiffness: 0.2,
+                render: {
+                    visible: false
+                }
+            }
+        });
 
-    // let logo = Bodies.rectangle(window.innerWidth/2, window.innerHeight/4, window.innerWidth, 50.5, {
-    //   isStatic: true,
-    //   render: {
-    //     sprite: {
-    //       texture: './assets/images/logo.png'
-    //     }
-    //   }
-    // })
-    //
-    // World.add(world, logo);
-    //
-    //
+    World.add(world, mouseConstraint);
 
-    // var stack = Composites.stack(20, 20, 10, 4, 0, 0, function(x, y) {
-    //   if (Common.random() > 0.35) {
-    //     return Bodies.rectangle(x, y, 64, 64, {
-    //       render: {
-    //         strokeStyle: '#ffffff',
-    //         sprite: {
-    //           texture: './assets/images/logo.png'
-    //         }
-    //       }
-    //     });
-    //   }
-    // })
-    //
-    // World.add(world, stack);
+    render.mouse = mouse;
+
+    // fit the render viewport to the scene
+    Render.lookAt(render, {
+        min: { x: 0, y: 0 },
+        max: { x: window.innerWidth, y: window.innerHeight }
+    });
 
 
-  }
+    function loop(timestamp) {
+      var progress = timestamp - lastRender
+
+      for ( i = 0; i < length; i++ ) {
+        let element = elements[i][0]
+        let properties = elements[i][1]
+
+        // debugger;
+        console.log('body ', world.bodies[0].position.x)
+        console.log('element ', element.style.left  )
+
+
+        // debugger;
+
+        element.style.position = 'absolute';
+        // element.style.left = ( - properties[2]/2) + 'px'; // will be set by renderer
+        element.style.top = (world.bodies[0].position.y + 'px');
+        // element.style.width = properties[2] + 'px';
+        //
+        // let chevron = Matter.Vertices.fromPath(`50 0 75 50 100 100 25 100 0 50 25 0`),
+        // arrow = Matter.Vertices.fromPath('40 0 40 20 100 20 100 80 40 80 40 100 0 50');
+       }
+
+      lastRender = timestamp
+      window.requestAnimationFrame(loop)
+    }
+
+    let lastRender = 0
+    window.requestAnimationFrame(loop)
+
+
+
+
+
+
+    let logo = Bodies.rectangle(window.innerWidth/2, window.innerHeight/4, window.innerWidth, 50.5, {
+      isStatic: true,
+      render: {
+        sprite: {
+          texture: './assets/images/logo.png'
+        }
+      }
+    })
+
+    World.add(world, logo);
+
+
+
+  //   var stack = Composites.stack(1, 20, 10, 4, 0, 0, function(x, y) {
+  //     if (Common.random() > 0.35) {
+  //       return Bodies.rectangle(x, y, 64, 64, {
+  //         render: {
+  //           strokeStyle: '#ffffff',
+  //           sprite: {
+  //             texture: './assets/images/logo.png'
+  //           }
+  //         }
+  //       });
+  //     }
+  //   })
+  //
+  //   World.add(world, stack);
+  //
+  //
+  // }
 
 }
