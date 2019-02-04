@@ -103,7 +103,7 @@ export class CanvasComponent implements OnInit {
 
 
         contents.push(
-          new HeaderItem(s.width/2+75,s.height/2-50,lucky_img.width/2, lucky_img.height/2, true, lucky_img, world),
+          new HeaderItem(s.width/2+75,s.height/2-20,lucky_img.width/2, lucky_img.height/2, true, lucky_img, world),
           new HeaderItem(s.width/2-90,s.height/2-50,search_img.width/2, search_img.height/2, true, search_img, world),
           new HeaderItem(s.width-55,30,sign_in_img.width/2, sign_in_img.height/2, true, sign_in_img, world),
           new HeaderItem(s.width-125,30,menu_img.width/2, menu_img.height/2, true, menu_img, world),
@@ -136,13 +136,44 @@ export class CanvasComponent implements OnInit {
       };
 
       s.mouseClicked = () => {
+        if (mousePressed != true) {
+          for (var i = 0; i < contents.length; i++) {
+            contents[i].body.isStatic = true;
+          }
+          for (var i = 0; i < contents.length; i++) {
+            contents[i].body.isSleeping = true;
+          };
+        }
         //wakes everything up and adds bodies to array
 
+        // for (var i = 0; i < contents.length; i++) {
+        //   contents[i].body.isSleeping = false;
+        // };
+        // search.body.isSleeping = false;
+        // boxes.push(new Logo(s.mouseX+10, s.mouseY, logo_img.width/10, logo_img.height/10, false, logo_img, world));
+      }
+
+      s.mousePressed = () => {
         for (var i = 0; i < contents.length; i++) {
+          contents[i].body.isStatic = false;
+        };
+      }
+
+      // s.mouseReleased = () => {
+      //   if (mousePressed != true) {
+      //     for (var i = 0; i < contents.length; i++) {
+      //       contents[i].body.isStatic = true;
+      //     }
+      //   }
+      // }
+
+      s.keyPressed = () => {
+        mousePressed = true;
+        for (var i = 0; i < contents.length; i++) {
+          contents[i].body.isStatic = false;
           contents[i].body.isSleeping = false;
         };
         search.body.isSleeping = false;
-        // boxes.push(new Logo(s.mouseX+10, s.mouseY, logo_img.width/10, logo_img.height/10, false, logo_img, world));
       }
 
 
