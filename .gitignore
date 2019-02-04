@@ -35,6 +35,15 @@ testem.log
 /typings
 *example-ignore*
 
+#inProgress
+
+*content*
+*engine*
+*footer*
+*get-elements*
+*header*
+*sketch*
+
 # e2e
 /e2e/*.js
 /e2e/*.map
