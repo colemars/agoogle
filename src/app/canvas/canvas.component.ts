@@ -33,12 +33,15 @@ export class CanvasComponent implements OnInit {
         contents = [],
         mousePressed = false,
         ground,
+        ceiling,
+        left_wall,
+        right_wall,
         logo,
         logo_img,
         gmail,
         gmail_img,
         search_img,
-        lucky_img.
+        lucky_img,
         images,
         images_img,
         menu,
@@ -99,15 +102,15 @@ export class CanvasComponent implements OnInit {
 
 
         contents.push(
-          new HeaderItem(s.width/2+75,s.height/2-50,lucky_img.width/2, lucky_img.height/2, options, lucky_img, world),
-          new HeaderItem(s.width/2-90,s.height/2-50,search_img.width/2, search_img.height/2, options, search_img, world),
-          new HeaderItem(s.width-55,30,sign_in_img.width/2, sign_in_img.height/2, options, sign_in_img, world),
-          new HeaderItem(s.width-125,30,menu_img.width/2, menu_img.height/2, options, menu_img, world),
-          new HeaderItem(s.width-180,30,images_img.width/2, images_img.height/2, options, images_img, world),
-          new HeaderItem(s.width-240,30,gmail_img.width/2, gmail_img.height/2, options, gmail_img, world),
-          new HeaderItem(110,30,store_img.width/2, store_img.height/2, options, store_img, world),
-          new HeaderItem(50,30,about_img.width/2, about_img.height/2, options, about_img, world),
-          new Logo(s.width/2, s.height/4, logo_img.width/2, logo_img.height/2, options, logo_img, world)
+          new HeaderItem(s.width/2+75,s.height/2-50,lucky_img.width/2, lucky_img.height/2, true, lucky_img, world),
+          new HeaderItem(s.width/2-90,s.height/2-50,search_img.width/2, search_img.height/2, true, search_img, world),
+          new HeaderItem(s.width-55,30,sign_in_img.width/2, sign_in_img.height/2, true, sign_in_img, world),
+          new HeaderItem(s.width-125,30,menu_img.width/2, menu_img.height/2, true, menu_img, world),
+          new HeaderItem(s.width-180,30,images_img.width/2, images_img.height/2, true, images_img, world),
+          new HeaderItem(s.width-240,30,gmail_img.width/2, gmail_img.height/2, true, gmail_img, world),
+          new HeaderItem(110,30,store_img.width/2, store_img.height/2, true, store_img, world),
+          new HeaderItem(50,30,about_img.width/2, about_img.height/2, true, about_img, world),
+          new Logo(s.width/2, s.height/4, logo_img.width/2, logo_img.height/2, true, logo_img, world)
         )
 
 
@@ -117,6 +120,10 @@ export class CanvasComponent implements OnInit {
 
         //builds ground
         ground = new Boundary(s.width/2, s.height+3, s.width, 85, {isStatic: true}, world);
+        ceiling = new Boundary(s.width/2, 0, s.width, 5, {isStatic: true}, world);
+        left_wall = new Boundary(0, s.height/2, 5, s.height, {isStatic: true}, world);
+        right_wall = new Boundary(s.width, s.height/2, 5, s.height, {isStatic: true}, world);
+        // ground = new Boundary(s.width/2, s.height+3, s.width, 85, {isStatic: true}, world);
       };
 
       //wakes everything up and adds bodies to array
@@ -129,7 +136,7 @@ export class CanvasComponent implements OnInit {
           contents[i].body.isSleeping = false;
         };
         search.body.isSleeping = false;
-        boxes.push(new Logo(s.mouseX+10, s.mouseY, logo_img.width/10, logo_img.height/10, logoArrayOptions, logo_img, world));
+        boxes.push(new Logo(s.mouseX+10, s.mouseY, logo_img.width/10, logo_img.height/10, false, logo_img, world));
       }
 
 
@@ -145,6 +152,9 @@ export class CanvasComponent implements OnInit {
 
         //updates positions relative to matter bodies
         ground.show(s)
+        // ceiling.show(s)
+        // left_wall.show(s)
+        // right_wall.show(s)
         search.show(s)
         // shows all generated bodies from array
         for (var i = 0; i < contents.length; i++) {
