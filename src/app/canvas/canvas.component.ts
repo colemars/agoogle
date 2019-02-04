@@ -145,12 +145,14 @@ export class CanvasComponent implements OnInit {
             contents[i].body.isSleeping = true;
           };
         }
+        console.log(doubleClick)
       }
 
       s.doubleClicked = () => {
         if (doubleClick === false) {
         doubleClick = true
         } else doubleClick = false
+        console.log(doubleClick)
       }
 
       s.mouseDragged = () => {
