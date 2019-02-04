@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import * as Matter from 'matter-js'
-import { GetElementsComponent } from './get-elements/get-elements.component.js'
-import { SketchComponent } from './sketch/sketch.component.js'
 // import { Two } from 'two.js'
 
 @Component({
