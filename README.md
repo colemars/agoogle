@@ -9,7 +9,7 @@ This is website that clones google for fun(educational purposes) and implements 
 #### In Action:
 <img src="https://media.giphy.com/media/cUIAQP2xaqKkrFi0xk/giphy.gif">
 
-### Or see it yourself:
+#### Or see it yourself:
 https://doogle-3b876.firebaseapp.com/
 
 ## Setup/Installation Requirements
