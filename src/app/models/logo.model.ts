@@ -11,7 +11,8 @@ export class Logo {
     this.options = {
       friction: 0,
       restitution: 1,
-      isSleeping: sleeping
+      isSleeping: sleeping,
+      density: .002
     };
     this.body = Matter.Bodies.rectangle(x,y,w,h,this.options)
     Matter.World.add(this.world, this.body);
