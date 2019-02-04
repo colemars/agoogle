@@ -37,6 +37,8 @@ export class CanvasComponent implements OnInit {
         logo_img,
         gmail,
         gmail_img,
+        search_img,
+        lucky_img.
         images,
         images_img,
         menu,
@@ -68,6 +70,10 @@ export class CanvasComponent implements OnInit {
 
         sign_in_img = s.loadImage('./assets/images/sign_in.png');
 
+        search_img = s.loadImage('./assets/images/search.png');
+
+        lucky_img = s.loadImage('./assets/images/lucky.png');
+
         //supposed to help performance
         s.disableFriendlyErrors = true
 
@@ -93,6 +99,8 @@ export class CanvasComponent implements OnInit {
 
 
         contents.push(
+          new HeaderItem(s.width/2+75,s.height/2-50,lucky_img.width/2, lucky_img.height/2, options, lucky_img, world),
+          new HeaderItem(s.width/2-90,s.height/2-50,search_img.width/2, search_img.height/2, options, search_img, world),
           new HeaderItem(s.width-55,30,sign_in_img.width/2, sign_in_img.height/2, options, sign_in_img, world),
           new HeaderItem(s.width-125,30,menu_img.width/2, menu_img.height/2, options, menu_img, world),
           new HeaderItem(s.width-180,30,images_img.width/2, images_img.height/2, options, images_img, world),
@@ -108,7 +116,7 @@ export class CanvasComponent implements OnInit {
 
 
         //builds ground
-        ground = new Boundary(s.width/2, s.height+3, s.width, 100, {isStatic: true}, world);
+        ground = new Boundary(s.width/2, s.height+3, s.width, 85, {isStatic: true}, world);
       };
 
       //wakes everything up and adds bodies to array
