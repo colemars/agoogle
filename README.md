@@ -8,6 +8,15 @@ This is website that clones google for fun(educational purposes) and implements 
 
 #### In Action:
 <img src="https://media.giphy.com/media/cUIAQP2xaqKkrFi0xk/giphy.gif">
+<img src="https://media.giphy.com/media/1TSQxC3SrnkTdguSi3/giphy.gif">
+
+#### Or see it yourself:
+https://doogle-3b876.firebaseapp.com/
+
+#### Usage:
+
+*Double click to toggle baby google stream
+*Gravity takes effect on keypress (no toggle)
 
 ## Setup/Installation Requirements
 
