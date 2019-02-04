@@ -8,7 +8,7 @@ import * as Matter from 'matter-js'
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  title = 'app';
+  title = 'Doogle';
   test: string;
 
   constructor() {}
