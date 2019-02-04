@@ -21,23 +21,18 @@ export class CanvasComponent implements OnInit {
   ngOnInit() {
 
     let Engine = Matter.Engine,
-        // Render = Matter.Render,
         World = Matter.World,
-        Bodies = Matter.Bodies;
-
-    let engine;
-    let world;
-    let search;
-    let searchBody;
-    let boxes = [];
-    let bodies = [];
-    let logo;
-    let mousePressed = false;
-
-
-    let ground;
-
-    let img;
+        Bodies = Matter.Bodies,
+        engine,
+        world,
+        search,
+        searchBody,
+        boxes = [],
+        bodies = [],
+        logo,
+        mousePressed = false,
+        ground,
+        img;
 
     const sketch = (s) => {
 
@@ -52,44 +47,30 @@ export class CanvasComponent implements OnInit {
         s.createCanvas(window.innerWidth,window.innerHeight);
         engine = Engine.create();
         world = engine.world;
-        //Engine.run(engine);
-        var options = {
-        isStatic: true
-        }
 
         var options = {
-        isStatic: true
+        isSleeping: true
         }
 
-        search = new Search(s.width/2, s.height/3, 500, 40, world, s);
-        search.show(s)
+        search = new Search(s.width/2, s.height/3+20, 500, 40, world, s);
+        search.build(s)
         let test2 = document.getElementById('search');
-        // debugger;
 
 
-        // searchBody = Bodies.rectangle(s.width/2, s.height/3, 500, 1, options)
-        //
-        // World.add(world, searchBody)
-        //
-        // search = s.createInput().addClass('search');
-        // search.position(s.width/2-250, s.height/3);
-        // search.style('width', '500px');
-        // search.style('height', '40px');
+
+
 
         logo = new Logo(s.width/2, s.height/4, img.width/2, img.height/2, options, img, world);
 
 
-        ground = new Boundary(s.width/2, s.height+3, s.width, 100, options, world);
+        ground = new Boundary(s.width/2, s.height+3, s.width, 100, {isStatic: true}, world);
 
-        // logo[0] = new Logo(s.width/2, s.height/3, img.width/2, img.height/2, options, img, world);
 
 
       };
 
       s.mouseClicked = () => {
-        var options = {
-        isStatic: true
-        }
+
         var testOptions = {
         isStatic: false
         }
@@ -97,28 +78,18 @@ export class CanvasComponent implements OnInit {
 
 
         if (!(mousePressed)) {
-        logo.delete();
-        logo = new Logo(s.width/2, s.height/4, img.width/2, img.height/2, testOptions, img, world);
+        logo.body.isSleeping = false;
+
+        search.body.isSleeping = false;
+
+        console.log(search);
+
         }
 
         mousePressed = true;
 
-
-
-        // logo.body.isStatic = false;
-
-        // if (!(logo === null)) {
-        //   console.log(logo)
-        //   logo.body.isStatic = false;
-        // }
-
         boxes.push(new Logo(s.mouseX+10, s.mouseY, img.width/10, img.height/10, testOptions, img, world));
 
-        // console.log(img)
-          // logo = new Box(0, s.height / 2, img.width / 2, img.height / 2, world)
-        // boxes.push(new Logo(s.mouseX, s.mouseY, img.width/10, img.height/10, img, world));
-        // console.log(img)
-        // boxes.push(new Box(s.mouseX, s.mouseY, s.random(10, 40), s.random(10, 40), world));
       }
 
       s.draw = () => {
@@ -129,34 +100,17 @@ export class CanvasComponent implements OnInit {
         var options = {
         isStatic: false
         }
-        // debugger;
 
-        // if (mousePressed === false) {
-          // console.log(logo)
-
-        // }
-        // for (var i = 0; i < logo.length; i++) {
-        // logo[i].show(s);
-        // }
         logo.show(s)
         ground.show(s)
+        search.show(s)
 
-
-        // var val = slider.value();
-        // s.background(val);
 
         for (var i = 0; i < boxes.length; i++) {
         boxes[i].show(s);
-        // logo[i].show(s);
-        // logo.show(s);
-        // console.log(logo)
         }
-        s.rectMode(s.CENTER);
-        // s.image(img, 0, s.height / 2, img.width / 2, img.height / 2);
-        // console.log(s.height)
-        s.rect(s.width/2, s.height/3, 500, 1);
-        };
-      }
+      };
+    }
     this.p5 = new p5(sketch);
   }
 }
