@@ -34,7 +34,8 @@ export class CanvasComponent implements OnInit {
         boxes = [],
         bodies = [],
         contents = [],
-        mousePressed = false,
+        keyPressed = false,
+        doubleClick = false,
         mConstraint,
         ground,
         ceiling,
@@ -136,7 +137,7 @@ export class CanvasComponent implements OnInit {
       };
 
       s.mouseClicked = () => {
-        if (mousePressed != true) {
+        if (keyPressed != true) {
           for (var i = 0; i < contents.length; i++) {
             contents[i].body.isStatic = true;
           }
@@ -144,13 +145,18 @@ export class CanvasComponent implements OnInit {
             contents[i].body.isSleeping = true;
           };
         }
-        //wakes everything up and adds bodies to array
+      }
 
-        // for (var i = 0; i < contents.length; i++) {
-        //   contents[i].body.isSleeping = false;
-        // };
-        // search.body.isSleeping = false;
-        // boxes.push(new Logo(s.mouseX+10, s.mouseY, logo_img.width/10, logo_img.height/10, false, logo_img, world));
+      s.doubleClicked = () => {
+        if (doubleClick === false) {
+        doubleClick = true
+        } else doubleClick = false
+      }
+
+      s.mouseDragged = () => {
+        if (doubleClick === true) {
+        boxes.push(new Logo(s.mouseX+10, s.mouseY, logo_img.width/10, logo_img.height/10, false, logo_img, world));
+        }
       }
 
       s.mousePressed = () => {
@@ -168,7 +174,7 @@ export class CanvasComponent implements OnInit {
       // }
 
       s.keyPressed = () => {
-        mousePressed = true;
+        keyPressed = true;
         for (var i = 0; i < contents.length; i++) {
           contents[i].body.isStatic = false;
           contents[i].body.isSleeping = false;
