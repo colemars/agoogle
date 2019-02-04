@@ -28,7 +28,8 @@ export class Boundary {
        p5.translate(pos.x, pos.y);
        p5.rotate(angle);
        p5.rectMode(p5.CENTER);
-       p5.fill(0);
+       p5.fill('#f2f2f2');
+       p5.stroke('#e5e5e5')
        p5.rect(0,0, this.w, this.h);
        p5.pop();
 
