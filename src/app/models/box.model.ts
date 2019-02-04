@@ -1,7 +1,5 @@
 import * as Matter from 'matter-js';
 import * as p5 from 'p5';
-// import * as p from '@types/p5';
-/// <reference path="../node_modules/@types/p5/index.d.ts"/>
 
 export class Box {
   [x: string]: any;
