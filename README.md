@@ -15,7 +15,7 @@ https://doogle-3b876.firebaseapp.com/
 
 #### Usage:
 
-*Double click to toggle baby google stream
+*Double click to toggle baby google stream  
 *Gravity takes effect on keypress (no toggle)
 
 ## Setup/Installation Requirements
