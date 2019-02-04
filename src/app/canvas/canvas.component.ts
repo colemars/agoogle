@@ -24,14 +24,18 @@ export class CanvasComponent implements OnInit {
     let Engine = Matter.Engine,
         World = Matter.World,
         Bodies = Matter.Bodies,
+        Mouse = Matter.Mouse,
+        MouseConstraint = Matter.MouseConstraint,
         engine,
         world,
+        canvas,
         search,
         searchBody,
         boxes = [],
         bodies = [],
         contents = [],
         mousePressed = false,
+        mConstraint,
         ground,
         ceiling,
         left_wall,
@@ -85,16 +89,13 @@ export class CanvasComponent implements OnInit {
       s.setup = () => {
 
         //builds p5 canvas
-        s.createCanvas(window.innerWidth,window.innerHeight);
+        canvas = s.createCanvas(window.innerWidth,window.innerHeight);
 
         //creates engine and world for matter.js physics bodies
         engine = Engine.create();
         world = engine.world;
 
         //sets sleeping to true. Unique from static because sleeping can be toggled(awoke).
-        var options = {
-        isSleeping: true
-        }
 
         //builds sleeping search bar, could probably be refactored
         search = new Search(s.width/2, s.height/3+20, 500, 40, world, s);
@@ -120,23 +121,28 @@ export class CanvasComponent implements OnInit {
 
         //builds ground
         ground = new Boundary(s.width/2, s.height+3, s.width, 85, {isStatic: true}, world);
-        ceiling = new Boundary(s.width/2, 0, s.width, 5, {isStatic: true}, world);
-        left_wall = new Boundary(0, s.height/2, 5, s.height, {isStatic: true}, world);
-        right_wall = new Boundary(s.width, s.height/2, 5, s.height, {isStatic: true}, world);
+        ceiling = new Boundary(s.width/2, 0, s.width, 30, {isStatic: true}, world);
+        left_wall = new Boundary(0, s.height/2, 30, s.height, {isStatic: true}, world);
+        right_wall = new Boundary(s.width, s.height/2, 30, s.height, {isStatic: true}, world);
         // ground = new Boundary(s.width/2, s.height+3, s.width, 85, {isStatic: true}, world);
+
+        const canvasPointer = Mouse.create(canvas.elt);
+          canvasPointer.pixelRatio = s.pixelDensity();
+          const options = {
+            mouse: canvasPointer
+          }
+          mConstraint = MouseConstraint.create(engine, options)
+          World.add(world, mConstraint);
       };
 
-      //wakes everything up and adds bodies to array
       s.mouseClicked = () => {
-        const logoArrayOptions = {
-        isStatic: false
-        }
-        //sets all from contents array toSleep false
+        //wakes everything up and adds bodies to array
+
         for (var i = 0; i < contents.length; i++) {
           contents[i].body.isSleeping = false;
         };
         search.body.isSleeping = false;
-        boxes.push(new Logo(s.mouseX+10, s.mouseY, logo_img.width/10, logo_img.height/10, false, logo_img, world));
+        // boxes.push(new Logo(s.mouseX+10, s.mouseY, logo_img.width/10, logo_img.height/10, false, logo_img, world));
       }
 
 
@@ -146,9 +152,6 @@ export class CanvasComponent implements OnInit {
         s.noStroke(255);
         s.fill(170);
         Engine.update(engine);
-        var options = {
-        isStatic: false
-        }
 
         //updates positions relative to matter bodies
         ground.show(s)
