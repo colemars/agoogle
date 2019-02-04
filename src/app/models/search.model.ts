@@ -8,8 +8,8 @@ export class Search {
     this.h = h;
     this.world = world;
     this.options = {
-      friction: 0.3,
-      restitution: 0.6,
+      friction: 0,
+      restitution: 0,
       isSleeping: true,
     }
 
@@ -43,7 +43,7 @@ export class Search {
            this.element.position(pos.x, pos.y);
            document.getElementById('search').style.width = this.w + 'px';
            document.getElementById('search').style.height = this.h + 'px';
-          
+
            p5.pop();
 
 

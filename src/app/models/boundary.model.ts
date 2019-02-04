@@ -8,8 +8,8 @@ export class Boundary {
     this.h = h;
     this.world = world;
     this.options = {
-      friction: 0.3,
-      restitution: 0.6,
+      friction: 0,
+      restitution: 1,
       isStatic: true,
     }
 

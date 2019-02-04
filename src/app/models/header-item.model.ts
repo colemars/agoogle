@@ -3,12 +3,17 @@ import * as p5 from 'p5';
 
 export class HeaderItem {
   [x: string]: any;
-  constructor(x, y, w, h, options, img, world) {
+  constructor(x, y, w, h, sleeping, img, world) {
     this.w = w;
     this.h = h;
     this.img = img;
     this.world = world;
-    this.body = Matter.Bodies.rectangle(x,y,w,h,options)
+    this.options = {
+      friction: 0,
+      restitution: 1,
+      isSleeping: sleeping
+    };
+    this.body = Matter.Bodies.rectangle(x,y,w,h,this.options)
     Matter.World.add(this.world, this.body);
 
   }
